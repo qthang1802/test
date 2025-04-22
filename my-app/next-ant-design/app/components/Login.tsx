@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Form, Input, Button, message } from 'antd';
+import { redirect } from 'next/navigation';
 
 interface LoginFormValues {
   username: string;
@@ -19,6 +20,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
     if (username === 'admin' && password === 'admin') {
       message.success('Login successful!');
       onLoginSuccess(); // Notify parent component of successful login
+      redirect('/home'); // Redirect to /home after login
     } else {
       message.error('Invalid username or password!');
     }

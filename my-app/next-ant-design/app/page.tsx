@@ -1,25 +1,22 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import { parseCookies } from 'nookies';
 
 const HomePage = () => {
   const router = useRouter();
+  const cookies = parseCookies();
 
-  useEffect(() => {
-    const cookies = parseCookies();
-    if (!cookies.authToken) {
-      router.push('/login'); // Redirect to login if not authenticated
-    }
-  }, [router]);
+  if (!cookies.authToken) {
+    // Redirect to login if not authenticated
+    router.push('/login');
+    return null; // Prevent rendering while redirecting
+  }
 
-  return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the root page for authenticated users.</p>
-    </div>
-  );
+  // Redirect to /home if authenticated
+  router.push('/home');
+  return null; // Prevent rendering while redirecting
 };
 
 export default HomePage;
