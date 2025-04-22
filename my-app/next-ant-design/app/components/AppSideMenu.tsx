@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 export function AppSideMenu() {
     const pathName = usePathname();
-    const [selectedKey, setSelectedKey] = useState(["1"]);
+    const [selectedKey, setSelectedKey] = useState([""]);
 
     useEffect(() => {
         if (pathName.startsWith("/bookmarks")) {
@@ -32,13 +32,13 @@ export function AppSideMenu() {
         else if (pathName.startsWith("/community")) {
             setSelectedKey(["9"]);
         } 
-        else if (pathName.startsWith("/home")) {
+        else if (pathName ===("/")) {
             setSelectedKey(["1"]);
         }
     }, [pathName]);
 
     const menuItems = [
-        {label:<Link href="/home">Home</Link>, key: "1"},
+        {label:<Link href="/">Home</Link>, key: "1"},
         {label:<Link href="/bookmarks">Bookmarks</Link>, key: "2"},
         {label:<Link href="/courses">Courses</Link>, key: "3"},
         {label:<Link href="/tutorials">Tutorials</Link>, key: "4"},
@@ -53,7 +53,8 @@ export function AppSideMenu() {
             mode="inline"
             selectedKeys={selectedKey}
             items={menuItems}
-        />
+        >
+        </Menu>
     );
 }
 export default AppSideMenu;

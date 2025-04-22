@@ -4,6 +4,7 @@ import { AntdRegistry } from '@ant-design/nextjs-registry';
 import "./globals.css";
 import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
+import { Content } from "antd/es/layout/layout";
 
 import AppHeader from "./components/AppHeader";
 import AppSideMenu from "./components/AppSideMenu";
@@ -49,12 +50,19 @@ export default function RootLayout({
               >
               <AppSideMenu />
             </Sider>
+            <Layout
+              style={{
+                marginLeft: "200px",
+              }}
+            >
+                <Content
+                  style={{ padding: "16px", minHeight: "calc(100vh - 64px)" }}
+                >
+                {children}
+              </Content>
+            </Layout>
           </Layout>
-          {children}
-
         </Layout>
-       
-        
       </AntdRegistry>
       </body>
     </html>
